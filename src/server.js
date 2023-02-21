@@ -1,61 +1,61 @@
 const express = require("express");
+require("dotenv").config();
+require("./db/connection");
+
+const Book = require("./books/model");
 
 const app = express();
 
 app.use(express.json());
 
-app.get("/book", (request, response) => {
+app.get("/books"), async (request, response) => {
     // console.log(request)
-    // response.send("hello from the book route")
-    const book = {
-        title: "lord of the rings",
-        author: "tolkein",
-        genre: "fantasy"
-    };
-    
-    const successResponse ={
-        message: "response sent successfully",
-        book: book,
-    };
+    // const allBooks = await Book.find({})
 
-    response.send(successResponse);
-});
+    // console.log(allBooks);
 
-app.post("/book", (request, response) => {
-    // response.send("Hello from the post route")
-    console.log(request.body)
-    const newBook = {
-        id: Math.floor(Math.random() * 50),
-        title: request.body.title,
-        author: request.body.author,
-        genre: request.body.genre
-    };
-    const successMessage ={
-        message: "Successfully added to DB",
-        newBook: newBook,
-    };
+    // const successResponse ={
+    //     message: "response sent successfully",
+    //     books: allBooks
+    // }
+    // response.send(successResponse)
+response.send("Hello")
+}
 
-    response.send(successMessage);
 
-});
 
-app.put("/book", (request,response) =>{
-    const book = {
-        id: Math.floor(Math.random() * 50),
-        title: "Anything",
-        author: "Bob the Scribe",
-        genre: "Self Help"
-    };
-    book ["genre"] = request.body.newGenre
+// app.post("/books/addbook", async (request, response) => {
+//     //addbook isn't necessary but helps with learning
+//     const newBook = await Book.create({
+//         title: request.body.title,
+//         author: request.body.author,
+//         genre: request.body.genre,
+//     });
+//     const successResponse ={
+//         message: "Successfully added to DB",
+//         newBook: newBook,
+//     };
+//     response.send(successResponse)
 
-   const successMessage ={
-        message: "Successfully updated DB",
-        updatedBook: book
-   };
-   response.send(successMessage)
-});
+// });
 
-app.listen(5001, () => console.log("server is listening on port 5001"));
+// app.put("/book", (request,response) =>{
+//     const book = {
+//         id: Math.floor(Math.random() * 50),
+//         title: "Anything",
+//         author: "Bob the Scribe",
+//         genre: "Self Help"
+//     };
+//     book ["genre"] = request.body.newGenre
+
+//    const successMessage ={
+//         message: "Successfully updated DB",
+//         updatedBook: book
+//    };
+//    response.send(successMessage)
+// });
+
+app.listen(5002, () => console.log("server is listening on port 5001"));
 
 
 // app.use("/books", express.static("books"));
