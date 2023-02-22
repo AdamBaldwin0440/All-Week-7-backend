@@ -25,7 +25,7 @@ app.post("/books/addbook", async (request, response) => {
 //Read-GET/find - UNBROKE IT!!!
 app.get("/books/allbooks", async (request, response) => {
     console.log(request)
-    const allBooks = await Book.find({"genre": "fabulous fiction"})
+    const allBooks = await Book.find({})
 
     console.log(allBooks);
 
@@ -38,33 +38,35 @@ app.get("/books/allbooks", async (request, response) => {
 //UPDATE-PUT - UNBROKE IT!
 
 app.put("/books/updatebooks", async (request, response) => {
-    const updateBook = await Book.updateOne({title:"Testing"},
-    {"genre": "coding problems"}
+
+    const updateBook = await Book.updateOne({title: request.body.title},
+    {[request.body.updateKey]:request.body.updateValue}
     );
     const successResponse ={
         message: "response sent successfully",
         update: updateBook
     }
-    response.send(successResponse)
     console.log(updateBook.modifiedCount)
+    response.send(successResponse)
 })
 //seems to be finding the right info but not sure if it's updating?
  
 //DELETE - WORKS!!!
 
 app.delete("/books/deletebooks", async (request, response) => {
-    const deleteBook = await Book.deleteOne({"title": "example"});
+    const deleteBook = await Book.deleteOne({"title": request.body.title});
     const successResponse ={
         message: "response sent successfully",
         delete: deleteBook
     }
-    response.send(successResponse)
     console.log(deleteBook)
+    response.send(successResponse)
+    
 })
 
 app.listen(5001, () => console.log("server is listening on port 5001"));
 
-//WOULD BE IDEAL TO MAKE THEM REUSABLE CODE --> SEE 22/02/23 NOTES
+//WOULD BE IDEAL TO MAKE THEM REUSABLE CODE --> SEE 23/02/23 NOTES
 
 
 
