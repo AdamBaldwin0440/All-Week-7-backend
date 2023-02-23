@@ -1,4 +1,3 @@
-const { response } = require("express");
 const express = require("express");
 require("dotenv").config();
 require("./db/connection");
@@ -7,34 +6,42 @@ const Book = require("./books/model");
 const app = express();
 app.use(express.json());
 
+const bookRouter = require("./books/routes")
+
 //CREATE-POST - WORKS!!!
-app.post("/books/addbook", async (request, response) => {
-    //addbook isn't necessary but helps with learning
-    const newBook = await Book.create({
-        title: request.body.title,
-        author: request.body.author,
-        genre: request.body.genre,
-    });
-    const successResponse ={
-        message: "Successfully added to DB",
-        newBook: newBook,
-    };
-    response.send(successResponse)
+// app.post("/books/addbook", async (request, response) => {
+//     //addbook isn't necessary but helps with learning
+//     const newBook = await Book.create({
+//         title: request.body.title,
+//         author: request.body.author,
+//         genre: request.body.genre,
+//     });
+//     const successResponse ={
+//         message: "Successfully added to DB",
+//         newBook: newBook,
+//     };
+//     response.send(successResponse)
 
-});
+// });
 //Read-GET/find - UNBROKE IT!!!
-app.get("/books/allbooks", async (request, response) => {
-    console.log(request)
-    const allBooks = await Book.find({})
+app.use(bookRouter); //using a router instead now
 
-    console.log(allBooks);
+//**Old server code now in controllers.js**
+// app.get("/books/allbooks", async (request, response) => {
+//     console.log(request)
+//     const allBooks = await Book.find({})
 
-    const successResponse ={
-        message: "response sent successfully",
-        books: allBooks
-    }
-    response.send(successResponse)
-});
+//     console.log(allBooks);
+
+//     const successResponse ={
+//         message: "response sent successfully",
+//         books: allBooks
+//     }
+//     response.send(successResponse)
+// });
+
+
+
 //UPDATE-PUT - UNBROKE IT!
 
 app.put("/books/updatebooks", async (request, response) => {
