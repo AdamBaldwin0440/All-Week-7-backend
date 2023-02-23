@@ -1,11 +1,11 @@
 const {Router} = require("express");
 const bookRouter = Router();
 
-const {getAllBooks, updateBook, deleteBook} = require("./controllers");
+const {addNewBook, getAllBooks, updateBook, deleteBook} = require("./controllers");
 
+bookRouter.post("/books/addbooks", addNewBook);
 bookRouter.get("/books/allbooks", getAllBooks);
 bookRouter.put("/books/updatebooks", updateBook);
-bookRouter.post("/books/addbooks", updateBook);
 bookRouter.delete("/books/deletebooks", deleteBook);
 
 //bookRouter.get AND bookRouter.put both work in isolation

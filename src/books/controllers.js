@@ -14,20 +14,20 @@ const getAllBooks =  async (request, response) => {
         response.send(successResponse)
     };
 
-//POST/CREATE logic
+//PUT/UPDATE logic
 const updateBook = async (request, response) => {
     const bookUpdate = await Book.updateOne({title: request.body.title},
             {[request.body.updateKey]:request.body.updateValue}
             );
             const successResponse ={
-                message: "response sent successfully",
+                message: "Book records updated",
                 update: bookUpdate
             }
             console.log("update successful")
             response.send(successResponse)
         }
 
-//PUT/CREATE logic
+//POST/CREATE logic
 const addNewBook = async (request, response) => {
     const addBook = await Book.create({
                 title: request.body.title,
@@ -35,7 +35,7 @@ const addNewBook = async (request, response) => {
                 genre: request.body.genre,
             });
             const successResponse ={
-                message: "Successfully added to DB",
+                message: "Book has been added to DataBase",
                 addBook: addBook,
             };
             response.send(successResponse)
