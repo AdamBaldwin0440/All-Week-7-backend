@@ -64,6 +64,33 @@ const deleteManyBooks = async (request, response) => {
     response.send(successResponse)
 }
 
+//GET single attempt
+const getOneBook = async (request, response) =>{
+    const getOne = await Book.findOne({
+        title: request.body.title
+    })
+        const successResponse ={
+        message: "The book you want has been found",
+        getOne: getOne
+    }
+    response.send(successResponse)
+};
+
+// await Adventure.findOne({ country: 'Croatia' }).exec();
+// const getAllBooks =  async (request, response) => {
+//     const allBooks = await Book.find({})
+
+//     console.log(allBooks);
+
+//     const successResponse ={
+//         message: "response sent successfully",
+//         books: allBooks
+//     }
+//     response.send(successResponse)
+// };
+
+
+
 //final export section (need to be togther it seems)
     module.exports = {
         getAllBooks,
@@ -71,6 +98,7 @@ const deleteManyBooks = async (request, response) => {
         addNewBook,
         deleteBook,
         deleteManyBooks,
+        getOneBook,
     };
 
 // app.put("/books/updatebooks", async (request, response) => {
