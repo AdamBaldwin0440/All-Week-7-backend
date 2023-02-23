@@ -1,10 +1,13 @@
 const {Router} = require("express");
 const bookRouter = Router();
-const Book = require("./model"); 
 
-const {getAllBooks} = require("./controllers");
+const {getAllBooks, updateBook} = require("./controllers");
 
-bookRouter.get("/books/allbooks", getAllBooks);
+// bookRouter.get("/books/allbooks", getAllBooks);
+bookRouter.put("/books/updatebooks", updateBook);
+
+//bookRouter.get AND bookRouter.put both work in isolation
+//why not together? bookRouter only usable once?
 
 // bookRouter.post("/books/addbook", async (request, response) => {
 //     const newBook = await Book.create({
