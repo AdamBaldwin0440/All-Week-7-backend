@@ -40,7 +40,7 @@ const addNewBook = async (request, response) => {
             };
             response.send(successResponse)
         }
-//DELETE logic
+//DELETE logic - delete ONE
 const deleteBook = async (request, response) => {
     const bookDelete = await Book.deleteOne({
         title: request.body.title
@@ -52,7 +52,17 @@ const deleteBook = async (request, response) => {
     response.send(successResponse)
 }
 
-
+//DELETE(MANY)
+const deleteManyBooks = async (request, response) => {
+    const deleteMulti = await Book.deleteMany({
+        author: request.body.author
+    })
+    const successResponse ={
+        message: "Matching books have been deleted",
+        bookDelete: deleteMulti
+    }
+    response.send(successResponse)
+}
 
 //final export section (need to be togther it seems)
     module.exports = {
@@ -60,6 +70,7 @@ const deleteBook = async (request, response) => {
         updateBook,
         addNewBook,
         deleteBook,
+        deleteManyBooks,
     };
 
 // app.put("/books/updatebooks", async (request, response) => {
